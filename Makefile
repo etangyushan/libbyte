@@ -2,10 +2,16 @@
 CC = gcc 
 CFLAGS =-Wall -D_SVID_SOURCE -std=gnu99
 
+
+TOOLS=/root/workdir/fileparserc/tools/gperftools
+TOOLSLIB=-lprofiler -L$(TOOLS)/lib
+#TOOLSLIB=-L$(TOOLS)/lib -ltcmalloc
+
 LIBDIR=/opt/libfpenv
-LIBS =  -lzlog  -L$(LIBDIR)/lib 
+LIBS =  -lzlog  -L$(LIBDIR)/lib $(TOOLSLIB)
 INCLUDE =  
 OO=*.c
+
 
 all:test
 
@@ -25,7 +31,7 @@ debug:
 	cp debug/libbytes.so example -f
 test:
 	$(CC) $(CFLAGS)  -o bytes $(OO) $(INCLUDE) $(LIBS)  -g
-	$(CC) $(CFLAGS)  -shared -fpic -o libbytes.so $(OO) $(INCLUDE) $(LIBS)   -g
+#	$(CC) $(CFLAGS)  -shared -fpic -o libbytes.so $(OO) $(INCLUDE) $(LIBS)   -g
 	#cp libbytes.so example -f
 
 

@@ -70,7 +70,7 @@ bool read_byte (byte_s *srcbyte, uint32_t len, byte_s *result)
 	*result = *srcbyte;
 	result->curdata_end = result->curdata_begin + len;
 
-	if (result->curdata_end >= srcbyte->srclen)
+	if (result->curdata_end > srcbyte->srclen)
 	{
 		zlog_error(err_log, "read too long error");
 		return false;
@@ -79,8 +79,7 @@ bool read_byte (byte_s *srcbyte, uint32_t len, byte_s *result)
     return true;
 }
 
-
-uint8_t get_byte_1 (byte_s *bytedata, uint32_t iterator)
+char get_byte_char (byte_s *bytedata, uint32_t iterator)
 {
 	if (false == byte_check_validity (bytedata))
 	{
@@ -88,37 +87,8 @@ uint8_t get_byte_1 (byte_s *bytedata, uint32_t iterator)
 		return 0;
 	}
 
-	uint8_t data = 0;
-	data = (uint8_t)bytedata->srcdata[bytedata->curdata_begin+iterator];
+	char data = 0;
+	data = bytedata->srcdata[bytedata->curdata_begin + iterator];
 
     return data;
 }
-
-//uint16_t get_byte_2 (byte_s *bytedata)
-//{
-//	if (false == byte_check_validity (bytedata))
-//	{
-//		zlog_error(err_log, "call byte_check_validity error");
-//		return 0;
-//	}
-//
-//	uint16_t data = 0;
-//	data = (uint16_t)bytedata->srcdata[bytedata->begin];
-//	bytedata->curoffset++;
-//
-//    return data;
-//}
-//
-//
-//uint32_t get_byte_4 (byte_s *bytedata)
-//{
-//	if (false == byte_check_validity (bytedata))
-//	{
-//		zlog_error(err_log, "call byte_check_validity error");
-//		return 0;
-//	}
-//
-//	uint32_t data = 0;
-//	data = (uint32_t)bytedata->srcdata[bytedata->begin];
-//	bytedata->curoffset++;
-//}
