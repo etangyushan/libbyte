@@ -21,6 +21,15 @@ int main()
 	srcbyte.srcdata = str;
 	srcbyte.srclen = strlen(str);
 
-	get_byte_1 (&srcbyte);
+	int num = 0;
+    uint32_t iterator = 0;
+	for (iterator = 0; iterator < srcbyte.srclen; iterator++)
+	{
+		num = get_byte_1 (&srcbyte, iterator);
+
+		zlog_info(inf_log, "get_byte_1 num:%c", num);
+	}
+
+
 	return 0;
 }
